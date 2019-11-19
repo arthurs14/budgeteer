@@ -2,10 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import '../CSS/Overview.css';
 import { getTodaysDate, daysLeft } from '../Methods/dateMethods';
-import { calcTotalSpent } from '../Methods/calculations';
+import { calcTotalSpent, calcDaily, spendableBalance } from '../Methods/calculations';
 
 const _Overview = ({ purchases, budget }) => {
   const totalSpent = calcTotalSpent(purchases, budget);
+  const dailyBalance = calcDaily(budget);
+  const spendable = spendableBalance(budget);
   return(
     <div>
       <h1>Overview</h1>
@@ -18,11 +20,11 @@ const _Overview = ({ purchases, budget }) => {
       </div>
       <div>
         <h3>Spendable Money per Day</h3>
-        <div> -- insert value -- </div>
+          <div>{`$${dailyBalance.toFixed(2)}`}</div>
       </div>
       <div>
-        <h3>Budget Standing</h3>
-        <div> -- insert if in the positive/negative --</div>
+        <h3>Spendable Balance</h3>
+          <div>{spendable >= 0 ? `$${spendable.toFixed(2)} left` : `You are overspending by ${spendable.toFixed(2)}!`}</div>
       </div>
     </div>
   );

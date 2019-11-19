@@ -3,7 +3,6 @@ import BudgetForm from './PurchaseForm';
 import { connect } from 'react-redux';
 
 const _Budget = ({ purchases }) => {
-  console.log('list: ', purchases);
   const categories = Object.keys(purchases);
   return(
     <div id='container'>

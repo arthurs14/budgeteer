@@ -1,3 +1,5 @@
+import { daysLeft } from './dateMethods';
+
 // Calculate expenses with 15% additional
 const calcExpenses = (expense) => {
   const percent = 1.15;
@@ -26,8 +28,28 @@ const calcTotalSpent = (purchaseList) => {
   return purchaseTotal;
 };
 
+// Calculate budget thats available after calculating how much
+// money is left in checkings
+const spendableBalance = (budget) => {
+  const balance = calcStanding(budget);
+  const savings = 2/3;
+  return balance - (balance * savings);
+};
+
+// Calculate daily balance
+const calcDaily = (budget) => {
+  const balance = spendableBalance(budget);
+  if(balance === 0) {
+    return 0;
+  }
+  const days = daysLeft();
+  return balance / days;
+};
+
 export {
   calcExpenses,
   calcStanding,
-  calcTotalSpent
+  calcTotalSpent,
+  spendableBalance,
+  calcDaily
 };
