@@ -4,22 +4,22 @@
   "description": "",
   "main": "public/Main.js",
   "scripts": {
+    "webpack": "webpack --watch --mode=development",
     "start": "webpack-dev-server --mode development",
-    "electron:start": "electron ."
-  },
-  "babel": {
-    "presets": [
-      "@babel/env",
-      "@babel/preset-react"
-    ]
+    "start:dev": "nodemon server/index.js --ignore dist/ --ignore src/ & npm run webpack",
+    "electron:start": "electron .",
+    "seed": "node scripts/seed.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.7.2",
+    "@babel/plugin-transform-runtime": "^7.6.2",
     "@babel/preset-env": "^7.7.1",
     "@babel/preset-react": "^7.7.0",
+    "@babel/runtime": "^7.7.2",
+    "axios": "^0.19.0",
     "babel-loader": "^8.0.6",
     "css-loader": "^3.2.0",
     "electron": "^7.1.1",
@@ -35,7 +35,10 @@
     "webpack-dev-server": "^3.9.0"
   },
   "dependencies": {
+    "express": "^4.17.1",
     "moment": "^2.24.0",
+    "sequelize": "^5.21.2",
+    "sqlite3": "^4.1.0",
     "uuid": "^3.3.3"
   }
 }

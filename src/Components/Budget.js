@@ -4,7 +4,10 @@ import { Link } from 'react-router-dom';
 import { calcStanding } from '../Methods/calculations';
 
 const _Budget = ({ budget }) => {
-  const balance = calcStanding(budget);
+
+  const userBudget = {...budget[0]};
+  const balance = calcStanding(userBudget);
+  console.log('budget page: ', budget);
   return(
     <div>
       <h1>Budget Details</h1>
@@ -14,7 +17,7 @@ const _Budget = ({ budget }) => {
           <h2>Starting Amount</h2>
           <div>
             {
-              budget.total ? `$${(budget.total * 1).toFixed(2)}` : `$0.00`
+              userBudget.total ? `$${(userBudget.total * 1).toFixed(2)}` : `$0.00`
             }
           </div>
         </div>
@@ -22,7 +25,7 @@ const _Budget = ({ budget }) => {
           <h2>Finances</h2>
           <div>
             {
-              budget.finances ? `$${(budget.finances * 1).toFixed(2)}` : `$0.00`
+              userBudget.finances ? `$${(userBudget.finances * 1).toFixed(2)}` : `$0.00`
             }
           </div>
         </div>
@@ -30,7 +33,7 @@ const _Budget = ({ budget }) => {
           <h2>Expenses</h2>
           <div>
             {
-              budget.totalExpenses ? `$${(budget.totalExpenses * 1).toFixed(2)}` : `$0.00`
+              userBudget.totalExpenses ? `$${(userBudget.totalExpenses * 1).toFixed(2)}` : `$0.00`
             }
           </div>
         </div>
@@ -38,7 +41,7 @@ const _Budget = ({ budget }) => {
           <h2>Income</h2>
           <div>
             {
-              budget.income ? `$${(budget.income * 1).toFixed(2)}` : `$0.00`
+              userBudget.income ? `$${(userBudget.income * 1).toFixed(2)}` : `$0.00`
             }
           </div>
         </div>

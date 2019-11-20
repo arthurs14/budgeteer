@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { setBudget } from '../Redux/store';
+import { changeBudget } from '../Redux/store';
 import { calcExpenses } from '../Methods/calculations';
 
 class _BudgetForm extends Component {
@@ -25,9 +25,11 @@ class _BudgetForm extends Component {
   save(ev) {
     ev.preventDefault();
     const {total, finances, expenses, income} = this.state;
+    const id = this.props.budget[0].id;
     // calculate expenses
     const totalExpenses = calcExpenses(expenses);
-    this.props.setBudget({
+    this.props.updateBudget({
+      id,
       total: total * 1,
       finances: finances * 1,
       totalExpenses,
@@ -39,6 +41,7 @@ class _BudgetForm extends Component {
   render() {
     const { total, finances, expenses, income, redirect } = this.state;
     const { onChange, save } = this;
+    //console.log('user budget: ', this.props.budget );
 
     if(redirect) {
       return <Redirect to='/budget' />;
@@ -71,9 +74,13 @@ class _BudgetForm extends Component {
   }
 }
 
-const BudgetForm = connect(null, (dispatch) => {
+const BudgetForm = connect(({ budget }) => {
   return {
-    setBudget: (budget) => dispatch(setBudget(budget))
+    budget
+  };
+}, (dispatch) => {
+  return {
+    updateBudget: (budget) => dispatch(changeBudget(budget))
   };
 })(_BudgetForm);
 

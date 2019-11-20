@@ -1,4 +1,5 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
+import axios from 'axios';
 import thunk from 'redux-thunk';
 
 // Purchase reducer
@@ -33,7 +34,7 @@ const budgetReducer = (state = {}, action) => {
     case SET_BUDGET:
       return action.budget;
     case UPDATE_BUDGET:
-      return state === action.budget ? state : action.budget;
+      return state.id === action.budget.id ? action.budget : state;
     default:
       return state;
   }
@@ -55,11 +56,31 @@ const addToList = (item) => ({ type: ADD_ITEM, item});
 const setBudget = (budget) => ({ type: SET_BUDGET, budget });
 const updateBudget = (budget) => ({ type: UPDATE_BUDGET, budget });
 
+// Thunks
+// Budget Calls
+const getBudget = () => {
+  return async(dispatch) => {
+    const budget = (await axios.get('/api/budget')).data;
+    dispatch(setBudget(budget));
+  };
+};
+
+const changeBudget = (budget) => {
+  console.log('budget thunk: ', budget);
+  const newBudget = {...budget};
+  return async (dispatch) => {
+    await axios.put(`/api/updatebudget/${newBudget.id}`, newBudget);
+    return dispatch(updateBudget(newBudget));
+  };
+};
+
 export default store;
 export {
   getList,
   addToList,
   setBudget,
-  updateBudget
+  updateBudget,
+  getBudget,
+  changeBudget
 };
 

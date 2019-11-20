@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { addToList } from '../Redux/store';
-import uuid from 'uuid';
 
 class _PurchaseForm extends Component {
   constructor() {
     super();
     this.state = {
-      id: uuid.v4(),
       purchaseName: '',
       price: 0,
       category: ''
@@ -24,7 +22,6 @@ class _PurchaseForm extends Component {
     ev.preventDefault();
     this.props.AddItem(this.state);
     this.setState({
-      id: uuid.v4(),
       purchaseName: '',
       price: 0,
       category: ''

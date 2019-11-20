@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { HashRouter, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { getList } from '../Redux/store';
 import '../CSS/App.css';
 
 // Components
@@ -10,11 +9,12 @@ import Overview from './Overview';
 import Purchases from './Purchases';
 import Budget from './Budget';
 import BudgetForm from './BudgetForm';
+import { getBudget } from '../Redux/store';
 
 class _Main extends Component {
   componentDidMount() {
     // when we have a way to persist?
-    //this.props.getList();
+    this.props.getBudget();
   }
 
   render() {
@@ -32,7 +32,7 @@ class _Main extends Component {
 
 const Main = connect(null, (dispatch) => {
   return {
-    getList: () => dispatch(getList())
+    getBudget: () => dispatch(getBudget())
   };
 })(_Main);
 
