@@ -13,7 +13,6 @@ import { getBudget, getList } from '../Redux/store';
 
 class _Main extends Component {
   componentDidMount() {
-    // when we have a way to persist?
     this.props.getData();
   }
 

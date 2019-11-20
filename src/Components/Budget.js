@@ -5,6 +5,7 @@ import { calcStanding } from '../Methods/calculations';
 
 const _Budget = ({ budget }) => {
   const balance = calcStanding(budget);
+  console.log('budget: ', budget);
   return(
     <div>
       <h1>Budget Details</h1>

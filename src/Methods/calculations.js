@@ -1,4 +1,5 @@
 import { daysLeft } from './dateMethods';
+import { sortPurchases } from './sort';
 
 // Calculate expenses with 15% additional
 const calcExpenses = (expense) => {
@@ -17,12 +18,13 @@ const calcStanding = (data) => {
 
 // Calculate total spent on purchases
 const calcTotalSpent = (purchaseList) => {
-  const categories = Object.keys(purchaseList);
+  const sortedPurchases = sortPurchases(purchaseList);
+  const categories = Object.keys(sortedPurchases);
   if(categories.length === 0) {
     return 0;
   }
   const categoryPurchases = categories.map(category => {
-    return purchaseList[category].reduce((acc, val) => acc += val.price * 1, 0);
+    return sortedPurchases[category].reduce((acc, val) => acc += val.price * 1, 0);
   });
   const purchaseTotal = categoryPurchases.reduce((acc, val) => acc += val * 1, 0);
   return purchaseTotal;

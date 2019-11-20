@@ -26,20 +26,24 @@ app.get('/api/budget', (req, res, next) => {
 app.get('/api/purchases', (req, res, next) => {
   Purchase.findAll()
     .then(list => {
-      const items = {};
-      list.forEach(item => {
-        if(items[item.category]) {
-          items[item.category] = [...items[item.category], item]
-        }
-        items[item.category] = [item];
-      });
-      res.send(items);
+      // const items = {};
+      // //console.log('length: ', list.length);
+      // list.forEach(item => {
+      //   //console.log('item: ', item);
+      //   if(items[item.category]) {
+      //     items[item.category] = [...items[item.category], item];
+      //     console.log('items[item.category]: ', items[item.category]);
+      //   }
+      //   items[item.category] = [item];
+      // });
+      // //console.log('items server: ', items);
+      // res.send(items);
+      res.send(list);
     })
     .catch(next);
 });
 
 app.post('/api/addpurchase', (req, res, next) => {
-  console.log('req.body: ', req.body);
   Purchase.create({
     purchaseName: req.body.purchaseName,
     price: req.body.price,

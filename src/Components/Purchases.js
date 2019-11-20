@@ -1,11 +1,11 @@
 import React from 'react';
 import BudgetForm from './PurchaseForm';
 import { connect } from 'react-redux';
+import { sortPurchases } from '../Methods/sort';
 
 const _Budget = ({ purchases }) => {
-  console.log('purchases: ', purchases);
-  //const something = purchases.map(purchase => )
-  const categories = Object.keys(purchases);
+  const sort = sortPurchases(purchases);
+  const categories = Object.keys(sort);
   return(
     <div id='container'>
       <h1>Purchase Summary</h1>
@@ -20,7 +20,7 @@ const _Budget = ({ purchases }) => {
               { `${category.charAt(0).toUpperCase() + category.slice(1)}` }
               <ul key={ category }>
                 {
-                  purchases[category].map(item =>
+                  sort[category].map(item =>
                     <li key={ item.id }>
                       {item.purchaseName} - ${item.price}
                     </li>

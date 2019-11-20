@@ -10,20 +10,12 @@ const ADD_ITEM = 'ADD_ITEM';
 const SET_BUDGET = 'SET_BUDGET';
 const UPDATE_BUDGET = 'UPDATE_BUDGET';
 
-const purchaseReducer = (state = {}, action) => {
+const purchaseReducer = (state = [], action) => {
   switch(action.type) {
     case SET_LIST:
       return action.list;
-    case ADD_ITEM:
-      const categories = Object.keys(state);
-      const category = action.item.category;
-      if(categories.includes(category)) {
-        state[category] = [...state[category], action.item];
-        return {...state};
-      }
-      state[category] = [];
-      state[category].push(action.item);
-      return {...state};
+    case ADD_ITEM:;
+      return [...state, action.item];
     default:
       return state;
   }
@@ -49,7 +41,7 @@ const store = createStore(reducer, applyMiddleware(thunk));
 
 // Action Creators
 // Purchase Creators
-const setList = (list) => ({ type: SET_LIST,list });
+const setList = (list) => ({ type: SET_LIST, list });
 const addToList = (item) => ({ type: ADD_ITEM, item});
 
 // Budget Creators
@@ -81,7 +73,6 @@ const getList = () => {
 };
 
 const addItem = (item) => {
-  console.log('item: ', item);
   return async(dispatch) => {
     const added = (await axios.post('/api/addpurchase', item)).data;
     dispatch(addToList(added));

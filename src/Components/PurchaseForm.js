@@ -20,7 +20,6 @@ class _PurchaseForm extends Component {
 
   create(ev) {
     ev.preventDefault();
-    console.log('this.state: ', this.state );
     this.props.addItem(this.state);
     this.setState({
       purchaseName: '',
