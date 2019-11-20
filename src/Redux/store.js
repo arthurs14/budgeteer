@@ -3,7 +3,7 @@ import axios from 'axios';
 import thunk from 'redux-thunk';
 
 // Purchase reducer
-const GET_LIST = 'GET_LIST';
+const SET_LIST = 'SET_LIST';
 const ADD_ITEM = 'ADD_ITEM';
 
 // Budget Reducer
@@ -12,7 +12,7 @@ const UPDATE_BUDGET = 'UPDATE_BUDGET';
 
 const purchaseReducer = (state = {}, action) => {
   switch(action.type) {
-    case GET_LIST:
+    case SET_LIST:
       return action.list;
     case ADD_ITEM:
       const categories = Object.keys(state);
@@ -34,7 +34,7 @@ const budgetReducer = (state = {}, action) => {
     case SET_BUDGET:
       return action.budget;
     case UPDATE_BUDGET:
-      return state.id === action.budget.id ? action.budget : state;
+      return state[0] === action.budget ? state[0] : action.budget;
     default:
       return state;
   }
@@ -49,7 +49,7 @@ const store = createStore(reducer, applyMiddleware(thunk));
 
 // Action Creators
 // Purchase Creators
-const getList = () => ({ type: GET_LIST });
+const setList = (list) => ({ type: SET_LIST,list });
 const addToList = (item) => ({ type: ADD_ITEM, item});
 
 // Budget Creators
@@ -66,21 +66,37 @@ const getBudget = () => {
 };
 
 const changeBudget = (budget) => {
-  console.log('budget thunk: ', budget);
-  const newBudget = {...budget};
   return async (dispatch) => {
-    await axios.put(`/api/updatebudget/${newBudget.id}`, newBudget);
-    return dispatch(updateBudget(newBudget));
+    await axios.put(`/api/updatebudget/${budget.id}`, budget);
+    return dispatch(updateBudget(budget));
+  };
+};
+
+// Purchase Calls
+const getList = () => {
+  return async(dispatch) => {
+    const list = (await axios.get('/api/purchases')).data;
+    dispatch(setList(list));
+  };
+};
+
+const addItem = (item) => {
+  console.log('item: ', item);
+  return async(dispatch) => {
+    const added = (await axios.post('/api/addpurchase', item)).data;
+    dispatch(addToList(added));
   };
 };
 
 export default store;
 export {
-  getList,
+  setList,
   addToList,
   setBudget,
   updateBudget,
   getBudget,
-  changeBudget
+  changeBudget,
+  getList,
+  addItem
 };
 

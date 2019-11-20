@@ -25,7 +25,7 @@ class _BudgetForm extends Component {
   save(ev) {
     ev.preventDefault();
     const {total, finances, expenses, income} = this.state;
-    const id = this.props.budget[0].id;
+    const id = this.props.budget.id;
     // calculate expenses
     const totalExpenses = calcExpenses(expenses);
     this.props.updateBudget({

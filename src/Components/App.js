@@ -9,12 +9,12 @@ import Overview from './Overview';
 import Purchases from './Purchases';
 import Budget from './Budget';
 import BudgetForm from './BudgetForm';
-import { getBudget } from '../Redux/store';
+import { getBudget, getList } from '../Redux/store';
 
 class _Main extends Component {
   componentDidMount() {
     // when we have a way to persist?
-    this.props.getBudget();
+    this.props.getData();
   }
 
   render() {
@@ -32,7 +32,10 @@ class _Main extends Component {
 
 const Main = connect(null, (dispatch) => {
   return {
-    getBudget: () => dispatch(getBudget())
+    getData: () => {
+      dispatch(getBudget()),
+      dispatch(getList())
+    }
   };
 })(_Main);
 

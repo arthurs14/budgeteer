@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addToList } from '../Redux/store';
+import { addItem } from '../Redux/store';
 
 class _PurchaseForm extends Component {
   constructor() {
@@ -20,7 +20,8 @@ class _PurchaseForm extends Component {
 
   create(ev) {
     ev.preventDefault();
-    this.props.AddItem(this.state);
+    console.log('this.state: ', this.state );
+    this.props.addItem(this.state);
     this.setState({
       purchaseName: '',
       price: 0,
@@ -53,7 +54,7 @@ class _PurchaseForm extends Component {
 
 const PurchaseForm = connect(null, (dispatch) => {
   return {
-    AddItem: (item) => dispatch(addToList(item))
+    addItem: (item) => dispatch(addItem(item))
   }
 })(_PurchaseForm);
 

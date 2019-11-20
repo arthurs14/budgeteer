@@ -16,6 +16,21 @@ const syncAndSeed = async() => {
     ];
 
     const [ obj ] = await mapAndSave(Budget, defaultBudget);
+
+    const defaultPurchases = [
+      {
+        purchaseName: 'boba',
+        price: 5.23,
+        category: 'food'
+      },
+      {
+        purchaseName: '1tb m.2',
+        price: 207.99,
+        category: 'electronics'
+      }
+    ];
+
+    const [ f, e ] = await mapAndSave(Purchase, defaultPurchases);
   } catch(err) {
     throw new Error('something went wrong');
   }

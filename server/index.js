@@ -17,8 +17,36 @@ app.get('/', (req, res, next) => {
 
 app.get('/api/budget', (req, res, next) => {
   Budget.findAll()
-    .then(budget => res.send(budget))
+    .then(budget => {
+      res.send(budget[0]);
+    })
     .catch(next);
+});
+
+app.get('/api/purchases', (req, res, next) => {
+  Purchase.findAll()
+    .then(list => {
+      const items = {};
+      list.forEach(item => {
+        if(items[item.category]) {
+          items[item.category] = [...items[item.category], item]
+        }
+        items[item.category] = [item];
+      });
+      res.send(items);
+    })
+    .catch(next);
+});
+
+app.post('/api/addpurchase', (req, res, next) => {
+  console.log('req.body: ', req.body);
+  Purchase.create({
+    purchaseName: req.body.purchaseName,
+    price: req.body.price,
+    category: req.body.category
+  })
+  .then(item => res.send(item))
+  .catch(next);
 });
 
 app.put('/api/updatebudget/:id', (req,res,next) => {
