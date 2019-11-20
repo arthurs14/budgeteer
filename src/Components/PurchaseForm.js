@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { addItem } from '../Redux/store';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 class _PurchaseForm extends Component {
   constructor() {
@@ -33,19 +34,19 @@ class _PurchaseForm extends Component {
     const { create, onChange } = this;
     return(
       <form onSubmit={ create }>
-        <div>
+        <div className='form-group'>
           <label htmlFor='purchaseName'>Name of Purchase</label> <br />
-          <input type='text' name='purchaseName' value={ purchaseName } onChange={ onChange } /> <br />
+          <input type='text' name='purchaseName' value={ purchaseName } onChange={ onChange } />
         </div>
-        <div>
+        <div className='form-group'>
           <label htmlFor='price'>Price</label> <br />
           <input type='number' name='price' value={ price } onChange={ onChange } />
         </div>
-        <div>
+        <div className='form-group'>
           <label htmlFor='category'>Category</label> <br />
           <input type='text' name='category' value={ category } onChange={ onChange } />
         </div>
-        <button>Add Purchase</button>
+        <button className='btn btn-primary'>Add Purchase</button>
       </form>
     );
   }

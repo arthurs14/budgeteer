@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { calcStanding } from '../Methods/calculations';
+import '../CSS/Budget.css';
 
 const _Budget = ({ budget }) => {
   const balance = calcStanding(budget);
@@ -9,7 +10,7 @@ const _Budget = ({ budget }) => {
   return(
     <div>
       <h1>Budget Details</h1>
-      <div><Link to='/edit-budget'>Edit Budget</Link></div>
+      <div id='editBudget'><Link to='/edit-budget'>Edit Budget</Link></div>
       <div id='budgetDetails'>
         <div>
           <h2>Starting Amount</h2>

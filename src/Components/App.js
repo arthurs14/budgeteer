@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { HashRouter, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import '../CSS/App.css';
 
 // Components
@@ -11,6 +12,8 @@ import Budget from './Budget';
 import BudgetForm from './BudgetForm';
 import { getBudget, getList } from '../Redux/store';
 
+import NavTab from '../Styling/Nav';
+
 class _Main extends Component {
   componentDidMount() {
     this.props.getData();
@@ -19,7 +22,7 @@ class _Main extends Component {
   render() {
     return(
       <HashRouter>
-        <Route component={ Nav } />
+        <NavTab />
         <Route path='/' component={ Overview } exact />
         <Route path='/purchases' component={ Purchases } exact />
         <Route path='/budget' component={ Budget } exact />

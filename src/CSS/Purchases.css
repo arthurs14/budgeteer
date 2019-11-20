@@ -1,0 +1,16 @@
+#purchaseList {
+  list-style-type: none;
+  text-align: left;
+  width: 450px;
+  margin: 0 auto;
+}
+
+#paymentTitle {
+  text-align: center;
+  color: red;
+}
+
+#categories {
+  text-align: center;
+}
+

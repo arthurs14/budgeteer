@@ -11,21 +11,27 @@ const _Overview = ({ purchases, budget }) => {
   return(
     <div>
       <h1>Overview</h1>
-      <div>
-        <h2>{`${getTodaysDate()} (${daysLeft()} days left)`}</h2>
+      <div id='overview'>
+        <div>
+          <h2>{`${getTodaysDate()} (${daysLeft()} days left)`}</h2>
+        </div>
+        <br />
+        <div>
+          <h3>Spendable Money per Day</h3>
+            <div>{`$${dailyBalance.toFixed(2)}`}</div>
+        </div>
+        <br />
+        <div>
+          <h3>Spendable Balance</h3>
+            <div>{spendable >= 0 ? `$${spendable.toFixed(2)} left` : `You are overspending by ${spendable.toFixed(2)}!`}</div>
+        </div>
+        <br />
+        <div>
+          <h3>Total Spent</h3>
+            <div>${totalSpent.toFixed(2)}</div>
+        </div>
       </div>
-      <div>
-        <h3>Total Spent</h3>
-          <div>${totalSpent.toFixed(2)}</div>
-      </div>
-      <div>
-        <h3>Spendable Money per Day</h3>
-          <div>{`$${dailyBalance.toFixed(2)}`}</div>
-      </div>
-      <div>
-        <h3>Spendable Balance</h3>
-          <div>{spendable >= 0 ? `$${spendable.toFixed(2)} left` : `You are overspending by ${spendable.toFixed(2)}!`}</div>
-      </div>
+
     </div>
   );
 };

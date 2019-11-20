@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { changeBudget } from '../Redux/store';
 import { calcExpenses } from '../Methods/calculations';
+import '../CSS/BudgetForm.css';
 
 class _BudgetForm extends Component {
   constructor() {
@@ -41,33 +42,32 @@ class _BudgetForm extends Component {
   render() {
     const { total, finances, expenses, income, redirect } = this.state;
     const { onChange, save } = this;
-    //console.log('user budget: ', this.props.budget );
 
     if(redirect) {
       return <Redirect to='/budget' />;
     }
 
     return(
-      <div>
+      <div id='container'>
         <h1>Change Budget Details</h1>
         <form onSubmit={ save }>
-          <div>
+          <div className='form-group'>
             <label htmlFor='total'>Starting Amount</label> <br />
-            <input type='number' name='total' value={ total } onChange={ onChange } />
-          </div><br />
-          <div>
+            <input type='number' name='total' value={ total ? total : 0 } onChange={ onChange } placeholder='Starting Amount' />
+          </div>
+          <div className='form-group'>
             <label htmlFor='financeTotal'>Finances</label> <br />
             <input type='number' name='finances' value={ finances } onChange={ onChange } />
-          </div><br />
-          <div>
+          </div>
+          <div className='form-group'>
             <label htmlFor='expenseTotal'>Expenses</label> <br />
             <input type='number' name='expenses' value={ expenses } onChange={ onChange } />
           </div><br />
-          <div>
+          <div className='form-group'>
             <label htmlFor='income'>Income</label> <br />
             <input type='number' name='income' value={ income } onChange={ onChange } />
-          </div> <br />
-          <button>Save Changes</button>
+          </div>
+          <button className='btn btn-primary'>Save Changes</button>
         </form>
       </div>
     );

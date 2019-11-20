@@ -19,8 +19,8 @@ const syncAndSeed = async() => {
 
     const defaultPurchases = [
       {
-        purchaseName: 'boba',
-        price: 5.23,
+        purchaseName: 'In n Out',
+        price: 8.64,
         category: 'food'
       },
       {
